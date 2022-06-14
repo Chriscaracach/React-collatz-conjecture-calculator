@@ -1,26 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import {
-  Container,
-  Text,
-  Input,
-  Button,
-  HStack,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
+import { Container, Text, Input, Button, Flex, Box } from "@chakra-ui/react";
 import { collatzMethod } from "./utils/collatzMethod";
+import ResultsTable from "./components/ResultsTable";
+import CollatzNumberInput from "./components/NumberInput";
+import Home from "./components/Home";
 
 function App() {
   const [isSolved, setIsSolved] = useState(false);
@@ -48,51 +32,19 @@ function App() {
 
   return (
     <Container className="App">
+      <Home></Home>
       {isSolved ? (
-        <Flex spacing={4} direction="column" align="center">
-          <TableContainer>
-            <Table variant="simple">
-              <TableCaption>Collatz's Conjecture results</TableCaption>
-              <Thead>
-                <Tr>
-                  <Th></Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>Steps</Td>
-                  <Td>{steps}</Td>
-                </Tr>
-                <Tr>
-                  <Td>Collatz Sequence</Td>
-                  <Td>
-                    <Text noOfLines={[1, 2, 3]}>
-                      {intermediateValues.join()}
-                    </Text>
-                  </Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          </TableContainer>
-          <Button onClick={handleReset}>Try another number</Button>
-        </Flex>
+        <ResultsTable
+          steps={steps}
+          intermediateValues={intermediateValues}
+          handleReset={handleReset}
+          number={collatzNumber}
+        />
       ) : (
-        <Flex direction="column" align="center">
-          <Text>Enter a number</Text>
-          <Box>
-            <Input
-              value={collatzNumber}
-              onChange={(e) => handleCollatzNumber(e)}
-              placeholder="Ingresá un número"
-              size="sm"
-            />
-          </Box>
-          <Box>
-            <Button colorScheme="teal" onClick={solveCollatzGuess}>
-              Collatz!
-            </Button>
-          </Box>
-        </Flex>
+        <CollatzNumberInput
+          solveCollatzGuess={solveCollatzGuess}
+          handleCollatzNumber={handleCollatzNumber}
+        />
       )}
     </Container>
   );
