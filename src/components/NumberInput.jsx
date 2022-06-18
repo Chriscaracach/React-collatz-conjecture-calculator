@@ -7,7 +7,6 @@ const CollatzNumberInput = ({ solveCollatzGuess, handleCollatzNumber }) => {
       <Text m={2}>Let's try the Collatz's Conjecture</Text>
       <Box>
         <Input
-          // value={collatzNumber}
           onChange={(e) => handleCollatzNumber(e)}
           placeholder="Enter a number"
           size="sm"

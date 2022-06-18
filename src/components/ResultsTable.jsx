@@ -4,16 +4,22 @@ import {
   Text,
   TableContainer,
   Table,
-  TableCaption,
-  Thead,
   Tr,
-  Th,
   Tbody,
   Td,
   Button,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 
 const ResultsTable = ({ steps, intermediateValues, handleReset, number }) => {
+  let intermediateValuesMap = intermediateValues.map((item, i) => {
+    return (
+      <GridItem w="20%" h="10" key={i}>
+        <Text>{item}</Text>
+      </GridItem>
+    );
+  });
   return (
     <Flex spacing={4} direction="column" align="center" m={5}>
       <TableContainer>
@@ -25,12 +31,16 @@ const ResultsTable = ({ steps, intermediateValues, handleReset, number }) => {
             </Tr>
             <Tr>
               <Td>Steps</Td>
+
               <Td>{steps}</Td>
             </Tr>
             <Tr>
               <Td>Collatz Sequence</Td>
               <Td>
-                <Text>{intermediateValues.join()}</Text>
+                <Grid templateColumns="repeat(10, 1fr)" gap={3}>
+                  {intermediateValuesMap}
+                </Grid>
+                {/* <Text>{intermediateValues.join()}</Text> */}
               </Td>
             </Tr>
           </Tbody>
