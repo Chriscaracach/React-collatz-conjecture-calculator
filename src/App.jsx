@@ -53,7 +53,7 @@ function App() {
       borderRadius="20px"
       bg="pink.100"
       padding="0px"
-      height="100vh"
+      minHeight="100vh"
     >
       <Home />
       {isSolved ? (
