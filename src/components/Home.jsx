@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <Box
         p={3}
-        bg="pink"
+        bg="pink.300"
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -31,7 +31,7 @@ const Home = () => {
       </Box>
       <Box
         p={3}
-        bg="blue.100"
+        bg="pink.200"
         display="flex"
         flexDirection="column"
         alignItems="center"

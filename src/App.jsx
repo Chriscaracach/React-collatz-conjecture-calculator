@@ -1,11 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import { Container, Text, Input, Button, Flex, Box } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { collatzMethod } from "./utils/collatzMethod";
 import ResultsTable from "./components/ResultsTable";
 import CollatzNumberInput from "./components/NumberInput";
 import Home from "./components/Home";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import InputError from "./components/InputError";
 import LimitMessage from "./components/LimitMessage";
 
@@ -18,12 +17,7 @@ function App() {
   const [limitWarning, setLimitWarning] = useState(false);
 
   const handleCollatzNumber = (e) => {
-    setCollatzNumber(e.target.value);
-    if (!parseInt(collatzNumber)) {
-      setInputError(true);
-    } else {
-      setInputError(false);
-    }
+    setCollatzNumber(e.target.value.trim());
     if (collatzNumber > Number.MAX_VALUE - 1000000) {
       setLimitWarning(true);
     } else {
@@ -32,10 +26,17 @@ function App() {
   };
 
   const solveCollatzGuess = () => {
-    let results = collatzMethod(collatzNumber);
-    setSteps(results.step);
-    setIntermediateValues(results.intermediateValues);
-    setIsSolved(true);
+    if (collatzNumber) {
+      let results = collatzMethod(collatzNumber);
+      setSteps(results.step);
+      setIntermediateValues(results.intermediateValues);
+      setIsSolved(true);
+    } else {
+      setInputError(true);
+      setTimeout(() => {
+        setInputError(false);
+      }, 3000);
+    }
   };
 
   const handleReset = () => {
@@ -46,7 +47,14 @@ function App() {
   };
 
   return (
-    <Container className="App" maxW="70vw">
+    <Container
+      className="App"
+      maxW="70vw"
+      borderRadius="20px"
+      bg="pink.100"
+      padding="0px"
+      height="100vh"
+    >
       <Home />
       {isSolved ? (
         <ResultsTable

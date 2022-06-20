@@ -22,8 +22,8 @@ const ResultsTable = ({ steps, intermediateValues, handleReset, number }) => {
   });
   return (
     <Flex spacing={4} direction="column" align="center" m={5}>
-      <TableContainer>
-        <Table variant="striped" bg="pink">
+      <TableContainer borderRadius="10px">
+        <Table variant="simple" bg="pink.200">
           <Tbody>
             <Tr>
               <Td>Number</Td>
@@ -40,7 +40,6 @@ const ResultsTable = ({ steps, intermediateValues, handleReset, number }) => {
                 <Grid templateColumns="repeat(10, 1fr)" gap={3}>
                   {intermediateValuesMap}
                 </Grid>
-                {/* <Text>{intermediateValues.join()}</Text> */}
               </Td>
             </Tr>
           </Tbody>
